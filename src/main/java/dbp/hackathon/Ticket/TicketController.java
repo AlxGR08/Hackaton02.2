@@ -32,13 +32,13 @@ public class TicketController {
         return ResponseEntity.ok(tickets);
     }
 
-    @PatchMapping("/{id}/changeState")
-    public ResponseEntity<?> changeTicketState(@PathVariable Long id) {
+    @PatchMapping("/{id}/canjear")
+    public ResponseEntity<String> canjearTicket(@PathVariable Long id) {
         try {
             ticketService.changeState(id);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok("Ticket canjeado exitosamente.");
         } catch (IllegalStateException e) {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
